@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Profile - Instagram Clone{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">Edit Profile</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('edit_profile') }}" enctype="multipart/form-data">
+                    <div class="mb-4 text-center">
+                        <img src="{{ current_user.profile_pic }}" class="rounded-circle mb-3" style="width: 100px; height: 100px; object-fit: cover;" alt="{{ current_user.username }}">
+                        <div>
+                            <label for="profile_pic" class="form-label">Change Profile Picture</label>
+                            <input type="file" class="form-control" id="profile_pic" name="profile_pic" accept="image/*">
+                            <div class="mt-3" id="profile-preview-container" style="display: none;">
+                                <img id="profile-preview" class="img-fluid rounded-circle" style="width: 100px; height: 100px; object-fit: cover;" alt="Preview">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="bio" class="form-label">Bio</label>
+                        <textarea class="form-control" id="bio" name="bio" rows="3" placeholder="Tell about yourself...">{{ current_user.bio or '' }}</textarea>
+                        <div class="form-text">You can @mention other users and use #hashtags</div>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <a href="{{ url_for('profile', username=current_user.username) }}" class="btn btn-outline-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+    // Profile image preview
+    document.getElementById('profile_pic').addEventListener('change', function() {
+        const file = this.files;
+        if (file) {
+            const reader = new FileReader();
+            const previewContainer = document.getElementById('profile-preview-container');
+            const preview = document.getElementById('profile-preview');
+            
+            reader.addEventListener('load', function() {
+                preview.setAttribute('src', this.result);
+                previewContainer.style.display = 'block';
+            });
+            
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+{% endblock %}
+{% endblock %}
