@@ -1,0 +1,104 @@
+/* General styles */
+body {
+    background-color: #fafafa;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.main-container {
+    margin-top: 80px;
+    margin-bottom: 40px;
+}
+
+/* Profile styles */
+.profile-pic-nav {
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+    margin-right: 5px;
+}
+
+.profile-pic-sm {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+}
+
+/* Post styles */
+.post-card {
+    border-radius: 3px;
+    margin-bottom: 30px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.post-image {
+    max-height: 600px;
+    object-fit: contain;
+    background-color: #000;
+}
+
+.post-thumbnail-card {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 100%;
+    cursor: pointer;
+}
+
+.post-thumbnail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modal-image-container {
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-post-image {
+    max-height: 80vh;
+    object-fit: contain;
+}
+
+/* Interaction styles */
+.like-btn, .comment-btn {
+    color: #262626;
+    transition: color 0.2s;
+}
+
+.like-btn:hover, .comment-btn:hover {
+    color: #8e8e8e;
+}
+
+.like-btn .fas.fa-heart {
+    color: #ed4956 !important;
+}
+
+.comments-section .comment {
+    margin-bottom: 8px;
+}
+
+.view-comments-link {
+    cursor: pointer;
+}
+
+.comment small {
+    font-size: 0.7rem;
+    color: #8e8e8e;
+}
+
+/* Auth styles */
+.auth-card {
+    margin-top: 40px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer */
+.footer {
+    border-top: 1px solid #dbdbdb;
+    color: #8e8e8e;
+}
