@@ -72,4 +72,69 @@
                         <input type="text" class="form-control form-control-sm" placeholder="Add a comment..." name="comment">
                         <button class="btn btn-outline-secondary btn-sm" type="submit">Post</button>
                     </div>
+                </form>
+                <small class="text-muted d-block mt-2">{{ post.timestamp.strftime('%Y-%m-%d %H:%M') }}</small>
+            </div>
+        </div>
+        {% else %}
+        <div class="text-center my-5 py-5">
+            <div class="mb-4">
+                <i class="far fa-image fa-4x text-muted"></i>
+            </div>
+            <h3>No posts yet</h3>
+            {% if title == "Explore" %}
+            <p class="text-muted">Be the first to share a photo!</p>
+            <a href="{{ url_for('upload') }}" class="btn btn-primary">Upload a Photo</a>
+            {% else %}
+            <p class="text-muted">Follow users to see their posts in your feed.</p>
+            <a href="{{ url_for('explore') }}" class="btn btn-primary">Explore</a>
+            {% endif %}
+        </div>
+        {% endfor %}
+        
+        {% if posts.items %}
+        <nav aria-label="Page navigation" class="mt-4">
+            <ul class="pagination justify-content-center">
+                {% if posts.has_prev %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for(request.endpoint, page=posts.prev_num) }}">Previous</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">Previous</span>
+                </li>
+                {% endif %}
                 
+                {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                    {% if page_num %}
+                        {% if page_num == posts.page %}
+                        <li class="page-item active">
+                            <span class="page-link">{{ page_num }}</span>
+                        </li>
+                        {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for(request.endpoint, page=page_num) }}">{{ page_num }}</a>
+                        </li>
+                        {% endif %}
+                    {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                
+                {% if posts.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for(request.endpoint, page=posts.next_num) }}">Next</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">Next</span>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
